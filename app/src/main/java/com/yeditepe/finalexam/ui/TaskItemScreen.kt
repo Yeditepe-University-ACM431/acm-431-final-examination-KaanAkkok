@@ -6,6 +6,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -15,6 +19,7 @@ fun TaskItemScreen() {
 
     // TODO 1: Create a mutable state to hold completion status (Boolean)
     // Initial value should be false
+    var completionStatus by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.padding(16.dp)) {
 
@@ -25,10 +30,21 @@ fun TaskItemScreen() {
 
         // TODO 2: Show text "Completed" or "Not Completed"
         // depending on completion state
+        if (completionStatus) {
+            Text(
+                text = "Completed"
+            )
+        }
+        else {
+            Text(
+                text = "Not Completed"
+            )
+        }
 
         Button(
             onClick = {
                 // TODO 3: Toggle completion state
+                completionStatus = if (completionStatus) false else true
             }
         ) {
             Text("Change Status")
@@ -40,4 +56,5 @@ fun TaskItemScreen() {
 @Composable
 fun TaskItemPreview() {
     // TODO: Call TaskItemScreen
+    TaskItemScreen()
 }
