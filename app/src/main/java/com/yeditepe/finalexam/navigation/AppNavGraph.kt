@@ -4,8 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.yeditepe.finalexam.api.TaskApi
+import com.yeditepe.finalexam.model.TaskDto
+import com.yeditepe.finalexam.repository.TaskRepository
 import com.yeditepe.finalexam.ui.TaskDetailScreen
 import com.yeditepe.finalexam.ui.TaskListScreen
+import com.yeditepe.finalexam.viewmodel.TaskViewModel
 
 @Composable
 fun AppNavGraph() {
@@ -19,7 +23,9 @@ fun AppNavGraph() {
 
         // TODO 1: Add composable for "tasks"
         composable("tasks") {
-            TaskListScreen()
+            val repo = TaskRepository(TaskApi)
+            val viewModel = TaskViewModel(repo)
+            TaskListScreen(viewModel)
         }
 
         // TODO 2: Add composable for "taskDetail/{title}"
