@@ -2,7 +2,10 @@ package com.yeditepe.finalexam.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.yeditepe.finalexam.ui.TaskDetailScreen
+import com.yeditepe.finalexam.ui.TaskListScreen
 
 @Composable
 fun AppNavGraph() {
@@ -15,7 +18,14 @@ fun AppNavGraph() {
     ) {
 
         // TODO 1: Add composable for "tasks"
+        composable("tasks") {
+            TaskListScreen()
+        }
 
         // TODO 2: Add composable for "taskDetail/{title}"
+        composable("taskDetail/{title}") { backStackEntry ->
+            val title = backStackEntry.arguments?.getString("title") ?: return@composable
+            TaskDetailScreen(title)
+        }
     }
 }
